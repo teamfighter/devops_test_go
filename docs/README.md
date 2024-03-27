@@ -76,3 +76,5 @@ The tunnel will now be available on port 80.
 - **Enhance Documentation Accuracy:** Provide detailed descriptions for each deployment step, including commands, parameters, and dependencies.
 
 - **Use transaction tracing:** Use opentelemetry for transaction tracing and grafana tempo as viewer.
+
+- **Setup CI/CD:** Work on CI/CD pipelines to provide delivery and integration for application.
