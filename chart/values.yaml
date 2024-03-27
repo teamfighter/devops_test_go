@@ -73,7 +73,7 @@ ingress:
 # Microservice environment variables
 environment:
   redis:
-    addr: "redis://redis:6379"
+    addr: "redis://redis-master:6379"
 # Additional environment variables (optional). Example format below
 extraEnvs: []
 #  - name: TEST
