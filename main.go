@@ -10,6 +10,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"go.uber.org/zap"
 	"time"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 type server struct {
@@ -18,6 +19,7 @@ type server struct {
 }
 
 func main() {
+
 	logger, err := zap.NewProduction()
 	if err != nil {
 		log.Fatal("unable to initialize logger")
@@ -35,6 +37,10 @@ func main() {
 	}
 
 	router := httprouter.New()
+	go func() {
+		http.Handle("/metrics", promhttp.Handler())
+		http.ListenAndServe(":9100", nil)
+	}()
 
 	router.GET("/", srv.indexHandler)
 
