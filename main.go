@@ -19,7 +19,6 @@ type server struct {
 }
 
 func main() {
-
 	logger, err := zap.NewProduction()
 	if err != nil {
 		log.Fatal("unable to initialize logger")
