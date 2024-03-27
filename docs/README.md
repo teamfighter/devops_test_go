@@ -11,7 +11,9 @@ docker-compose up
 After that, application will be available at http://127.0.0.1:8080/. 
 Grafana will be available at http://127.0.0.1:3000/. Use `admin` as login and password to login. 
 Grafana dashboard will be installed during docker-compose up action and will be located at `Dashboards/General` folder. 
-Check related ![screenshot](screenshots/screenshot-grafana.png).
+Check related screenshot: 
+![screenshot](screenshots/screenshot-grafana.png) 
+
 ### Minikube Preparation
 
 - Install Minikube using the official documentation.
