@@ -41,8 +41,6 @@ services:
       - ./grafana/datasource.yaml:/etc/grafana/provisioning/datasources/ds.yaml
       - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
       - ./grafana/dashboards:/var/lib/grafana/dashboards
-    environment:
-      - DS_PROMETHEUS-APL=Prom
     ports:
       - "3000:3000"
     depends_on:
