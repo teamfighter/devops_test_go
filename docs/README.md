@@ -8,6 +8,10 @@ Run the following command to build containers and run them:
 docker-compose up
 ```
 
+After that, application will be available at http://127.0.0.1:8080/. 
+Grafana will be available at http://127.0.0.1:3000/. Use `admin` as login and password to login. 
+Grafana dashboard will be installed during docker-compose up action and will be located at `Dashboards/General` folder. 
+Check related ![screenshot](screenshots/screenshot-grafana.png).
 ### Minikube Preparation
 
 - Install Minikube using the official documentation.
@@ -68,4 +72,5 @@ The tunnel will now be available on port 80.
 - **Application Security Hardening:** Use HashiCorp Vault for storing secrets such as the Redis connection string.
 
 - **Enhance Documentation Accuracy:** Provide detailed descriptions for each deployment step, including commands, parameters, and dependencies.
-```
+
+- **Use transaction tracing:** Use opentelemetry for transaction tracing and grafana tempo as viewer.
