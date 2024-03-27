@@ -1,0 +1,105 @@
+image:
+  # name of image registry
+  repository: "teamfighter"
+  # path in image registry
+  path: "devops-test"
+  tag: "0.0.1"
+  # policy of pulling to image registry
+  imagePullPolicy: "Always"
+# Image pull secrets list to use for registry authentication
+imagePullSecrets: []
+# how many replicas of microservices is active
+replicas: "1"
+ports:
+  # Port where application will be available
+  http: "8080"
+  # annotation for k8s service with http
+  httpAnnotations: {}
+livenessProbe:
+  enabled: true
+  # when k8s start delay to getting probes
+  initialDelaySeconds: "5"
+  # how many attempts
+  failureThreshold: "5"
+  # how often
+  periodSeconds: "15"
+readinessProbe:
+  enabled: true
+  # when k8s start delay to getting probes
+  initialDelaySeconds: "5"
+  # how many attempts
+  failureThreshold: "5"
+  # how often
+  periodSeconds: "15"
+# time before killling by k8s
+terminationGracePeriodSeconds: "10"
+# define node selector
+nodeSelector: {}
+# define toleration
+tolerations: []
+# define affinity
+affinity: {}
+resources:
+  requests:
+    # cpu requests for choosing worker nodes
+    cpu: "100m"
+    # memory requests for choosing worker nodes
+    memory: "128Mi"
+  limits:
+    # memory limit for microservices
+    memory: "1Gi"
+# Optional deployment annotations
+deployment:
+  annotations: {}
+  podAnnotations: {}
+  serviceAccount:
+    create: true
+    name: devops-test
+    # Optional annotations
+    annotations: {}
+    # Whether opt out ServiceAccount automount or not
+    automount:
+      # Set opt_out to true to enable feature
+      opt_out: false
+      automountServiceAccountToken: false
+ingress:
+  # Toggle for enabling/disabling ingress
+  enabled: true
+  # URL for ingress
+  url: "devops-test.example.io"
+  # port of application
+  port: "8080"
+  extraAnnotations: {}
+# Microservice environment variables
+environment:
+  redis:
+    addr: "redis://redis:6379"
+# Additional environment variables (optional). Example format below
+extraEnvs: []
+#  - name: TEST
+#    value: "test"
+
+# Enable prometheus-operator PodMonitor
+podMonitor:
+  enabled: false
+  # interval: 15s
+  # scrapeTimeout: 10s
+  # labels: []
+  # relabelings: []
+  # metricRelabelings: []
+# Network policy variables
+policy:
+  enabled: false
+  allow_egress_internet:
+    egress:
+      - to:
+          - ipBlock:
+              cidr: 0.0.0.0/0
+# Security context for deployment
+securityContext:
+  runAsUser: 65534
+  allowPrivilegeEscalation: false
+  privileged: false
+  capabilities:
+    drop:
+      - ALL

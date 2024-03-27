@@ -1,0 +1,12 @@
+{{ if gt (.Values.replicas | int64) 1 }}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ .Chart.Name }}
+spec:
+  minAvailable: {{ sub (.Values.replicas | int64) 1 }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+{{ end }}

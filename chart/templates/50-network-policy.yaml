@@ -1,0 +1,19 @@
+{{- if eq (.Values.policy.enabled | toString) "true" }}
+---
+# allow internet to specific pods
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: allow-egress-internet-{{ .Chart.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  policyTypes:
+  - Egress
+  podSelector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  {{- with .Values.policy.allow_egress_internet.egress }}
+  egress:
+{{ toYaml . | indent 4 }}
+  {{- end }}
+{{- end }}

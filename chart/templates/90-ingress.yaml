@@ -1,0 +1,24 @@
+{{ if eq (.Values.ingress.enabled | toString) "true" }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Chart.Name }}-http
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    {{- if .Values.ingress.extraAnnotations }}
+{{ toYaml .Values.ingress.extraAnnotations | indent 4 }}
+    {{- end }}
+spec:
+  rules:
+    - host: {{ .Values.ingress.url | quote }}
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: "{{ $.Chart.Name }}-http"
+              port:
+                number: {{ $.Values.ingress.port }}
+{{ end }}
